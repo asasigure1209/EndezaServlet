@@ -1,0 +1,10 @@
+CREATE TABLE Student (
+	Id INTEGER,
+	Name VARCHAR(128),
+	Gpa FLOAT,
+	PRIMARY KEY (Id)
+);
+
+INSERT INTO Student(Id,Name,Gpa) VALUES(12300,'山田太郎',3.5);
+INSERT INTO Student(Id,Name,Gpa) VALUES(12301,'鈴木次郎',4.0);
+INSERT INTO Student(Id,Name,Gpa) VALUES(12302,'田中三郎',3.8);
