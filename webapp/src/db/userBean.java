@@ -1,0 +1,118 @@
+package db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+public class userBean {
+
+	private String id, email, name, profile, password;
+	
+	public userBean() {
+		
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return this.id;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	
+	public String getProfile() {
+		return this.profile;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public boolean insertRecord() {
+		try {
+			//DBのコネクションを取得
+			Connection con = DBManager.getUserConnection();
+			
+			//間接的にSQLを実行させる
+			String sql = "INSERT INTO user (id, email, name, profile, password) VALUES(?,?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, this.id);
+			ps.setString(2, this.email);
+			ps.setString(3, this.name);
+			ps.setString(4, this.profile);
+			ps.setString(4, this.password);
+			//sqlの実行
+			int count = ps.executeUpdate();//
+			//close connection
+			ps.close();
+			con.close();
+			//確認
+			if (count > 0)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public ArrayList<userBean> getUserRecordByEmail(String email, String password) {
+		
+		ArrayList<userBean> list = new ArrayList<userBean>();
+		
+		try {
+			//DBのコネクションを取得
+			Connection con = DBManager.getUserConnection();
+			
+			//間接的にSQLを実行させる
+			String sql = "SELECT * FROM user WHERE email=? AND password=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			//結果を格納する
+			while( rs.next() ) {
+				userBean tmpUB = new userBean();
+				tmpUB.setId(rs.getString("id"));
+				tmpUB.setEmail(rs.getString("email"));
+				tmpUB.setName(rs.getString("name"));
+				tmpUB.setProfile(rs.getString("profile"));
+				tmpUB.setPassword(rs.getString("password"));
+				//userBean	をリストに追加
+				list.add(tmpUB);
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			//最後にuserBeanを返す
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+}
