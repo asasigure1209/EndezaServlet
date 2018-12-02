@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class userBean {
 
-	private String id, email, name, profile, password;
+	private String id=null, email, name, profile="", password;
 	
 	public userBean() {
 		
@@ -18,6 +19,12 @@ public class userBean {
 	}
 	
 	public String getId() {
+		if (this.id == null) {
+			UUID u1 = UUID.randomUUID();
+			this.id = u1.toString();
+			return this.id;
+		}
+		
 		return this.id;
 	}
 	
@@ -102,7 +109,6 @@ public class userBean {
 				tmpUB.setEmail(rs.getString("email"));
 				tmpUB.setName(rs.getString("name"));
 				tmpUB.setProfile(rs.getString("profile"));
-				tmpUB.setPassword(rs.getString("password"));
 				//userBean	をリストに追加
 				list.add(tmpUB);
 			}
@@ -113,6 +119,65 @@ public class userBean {
 			return list;
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	
+	public ArrayList<userBean> getUserRecordById(String userId) {
+		ArrayList<userBean> list = new ArrayList<userBean>();
+		
+		try {
+			//DBのコネクションを取得
+			Connection con = DBManager.getUserConnection();
+			
+			//間接的にSQLを実行させる
+			String sql = "SELECT * FROM user WHERE id=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			ResultSet rs = ps.executeQuery();
+			//結果を格納する
+			while( rs.next() ) {
+				userBean tmpUB = new userBean();
+				tmpUB.setId(rs.getString("id"));
+				tmpUB.setEmail(rs.getString("email"));
+				tmpUB.setName(rs.getString("name"));
+				tmpUB.setProfile(rs.getString("profile"));
+				//userBean	をリストに追加
+				list.add(tmpUB);
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			//最後にuserBeanを返す
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public boolean setUserRecord() {
+		try {
+			//get DB connection
+			Connection con = DBManager.getUserConnection();
+			
+			//execute Sql
+			String sql = "INSERT INTO user (id, email, name, password) VALUES (?,?,?,?);";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, this.getId());
+			ps.setString(2, this.getEmail());
+			ps.setString(3, this.getName());
+			ps.setString(4, this.getPassword());
+			//sqlの実行
+			int count = ps.executeUpdate();
+			//close connection
+			ps.close();
+			con.close();
+			//確認
+			if (count > 0)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }

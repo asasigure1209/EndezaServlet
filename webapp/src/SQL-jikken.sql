@@ -35,3 +35,14 @@ INSERT INTO Grade(Class,Score,Id)
   VALUES('プログラミング','C',12301);
 INSERT INTO Grade(Class,Score,Id) 
   VALUES('歴史','A',12302);
+
+ALTER TABLE user change id id varchar(36)
+
+INSERT INTO user (id, email, name, password) VALUES ("testUserId","rito@gmail.com", "rito", "ritocompany");
+  
+  
+  
+  
+  
+  
+  

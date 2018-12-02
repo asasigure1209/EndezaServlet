@@ -1,8 +1,6 @@
 package state;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import javax.servlet.http.HttpSession;
 import db.userBean;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class SignupServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/SignupServlet")
+public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public SignupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +37,25 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ユーザー情報を処理するJavaBeanをつくる
+		//ユーザー情報を処理するJavaBeanを作る
 		userBean ub = new userBean();
-		//リクエストされたパラメーターを取得する
+		//リクエストされたパラメータ取得
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
+		String name = request.getParameter("name");
 		String password = request.getParameter("password");
-		//emailが一致するユーザを取得する
-		ArrayList<userBean> list = ub.getUserRecordByEmail(email, password);
 		
-		//セッションにuserIdをいれて結果のページをディスパッチする
-		if (!list.isEmpty()) {
+		//userを登録
+		ub.setEmail(email);
+		ub.setName(name);
+		ub.setPassword(password);
+		if (ub.setUserRecord()) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", list.get(0).getId());
+			session.setAttribute("user", ub.getId());
 			
 			response.sendRedirect("welcome.html");
 		} else {
-			response.sendRedirect("signin.html");
+			response.sendRedirect("signup.html");
 		}
 	}
 

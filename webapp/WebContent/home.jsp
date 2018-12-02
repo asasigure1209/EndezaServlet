@@ -14,7 +14,7 @@
 		<tr>
 		<td>name</td>
 		<td>email</td>
-		<td>password</td>
+		<td>userId</td>
 		<tr>
 		
 <%
@@ -25,10 +25,11 @@
 		<tr>
 		<td><%=ub.getName() %></td>
 		<td><%=ub.getEmail() %></td>
-		<td><%=ub.getPassword() %></td>
+		<td><%=ub.getId() %>
 <%
 	}
 %>
 	</table>
+	<a href="TimeLineServlet">timeLineへ</a>
 </body>
 </html>

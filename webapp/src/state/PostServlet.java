@@ -1,28 +1,23 @@
 package state;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import db.userBean;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class PostServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/PostServlet")
+public class PostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public PostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,24 +34,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ユーザー情報を処理するJavaBeanをつくる
-		userBean ub = new userBean();
-		//リクエストされたパラメーターを取得する
-		request.setCharacterEncoding("utf-8");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		//emailが一致するユーザを取得する
-		ArrayList<userBean> list = ub.getUserRecordByEmail(email, password);
-		
-		//セッションにuserIdをいれて結果のページをディスパッチする
-		if (!list.isEmpty()) {
-			HttpSession session = request.getSession();
-			session.setAttribute("user", list.get(0).getId());
-			
-			response.sendRedirect("welcome.html");
-		} else {
-			response.sendRedirect("signin.html");
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

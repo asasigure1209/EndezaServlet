@@ -3,14 +3,49 @@
 <head>
 	<meta charset="utf-8">
 	<title>陰stagram</title>
+	<link rel="stylesheet" href="./css/bulma.min.css">
 </head>
 <body>
-	<h1>陰stagram</h1>
-	<h2>login</h2>
-	<form action="LoginServlet" method="post">
-		email:<input type="email" name="email" required>
-		password:<input type="password" name="password" required>
-		<input type="submit" value="login" name="password">
-	</form>
+	<section class="hero is-fullheight is-white is-medium">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-centered">
+                    <article class="card is-rounded" style="min-width:320px">
+                        <div class="card-content" style="border: 0.5px solid black">
+                            <h1 class="title">
+                                <img src="http://placeholdit.imgix.net/~text?txtsize=13&txt=150%C3%9750&w=150&h=50" alt="logo"
+                                    width="200">
+                            </h1>
+								
+								<form action="LoginServlet" method="post">
+	                            <div class="field">
+	                                <p class="control">
+	                                    <input class="input" type="email" name="email" placeholder="Email">
+	                                </p>
+	                            </div>
+	                            <div class="field">
+	                                <p class="control">
+	                                    <input class="input" type="password" name="password" placeholder="Password">
+	                                </p>
+	                            </div>
+	                            <input type="submit" value="ログイン" class="button is-info is-fullwidth">
+                            </form>
+                        </div>
+                    </article>
+                </div>
+                <div class="columns is-centered" style="margin-top: 1em;">
+                    <article class="card is-rounded" style="min-width:320px">
+                        <div class="card-content" style="border:0.5px solid black">
+                            <div class="field">
+                                <p class="text">
+                                    アカウント持ってないの?　 <a href="signup.html">Signup</a>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
