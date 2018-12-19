@@ -36,7 +36,7 @@ INSERT INTO Grade(Class,Score,Id)
 INSERT INTO Grade(Class,Score,Id) 
   VALUES('歴史','A',12302);
 
-ALTER TABLE post change image image varchar(36)
+ALTER TABLE profile change image image varchar(36)
 
 INSERT INTO post (id, user, text, image) VALUES("test","11111111111111111111111111111111","contiha","999999999999999999999999999999999999")
 

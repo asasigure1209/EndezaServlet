@@ -1,0 +1,64 @@
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: white;
+    justify-content: space-around;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+.navbar-menu {
+    flex-grow: 0.5;
+    justify-content: center;
+}
+.navbar-menu .navbar-item {
+    flex-grow: 1;
+    justify-content: center;
+}
+.navbar-menu .navbar-item .control {
+    width: 50%;
+}
+.info {
+    margin: 100px 20px 0px 20px;
+}
+
+.text{
+  margin-top:px;
+  word-break:break-all;
+}
+
+.profile{
+  display:inline;
+}
+
+.title{
+  margin-right:20px;
+}
+
+.id{
+}
+
+.myprofile{
+  float:right;
+  margin-right:15%;
+}
+
+.post{
+  text-align:left;
+}
+
+.rink{
+    float: left;
+    margin: 10px 5px 15px 30px;
+}
+.picture{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+figcaption{
+  text-align:center;
+}

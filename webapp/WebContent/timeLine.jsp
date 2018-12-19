@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="./css/bulma.min.css">
 </head>
 <body cz-shortcut-listen="true">
+<% 
+	ArrayList<userBean> userList = (ArrayList<userBean>)request.getAttribute("userBeanList");
+	userBean ub = userList.get(0);
+%>
+
 	<!--ヘッダー部分-->
     <div class="navbar is-inline-flex is-transparent">
         <!--navbar-start で投稿ボタンとロゴを右に寄せる-->
@@ -25,7 +30,7 @@
         </div>
         <!--navbar-brand でロゴとして指定する-->
         <div class="navbar-brand">
-            <a class="navbar-item">
+            <a class="navbar-item" href="TimeLineServlet">
                 <img src="" alt="Logo" width="112" height="28">
             </a>
         </div>
@@ -33,7 +38,7 @@
         <!--navbar-end でプロフィールボタンを左に寄せる-->
         <div class="navbar-end">
             <div class="navbar-item">
-                <a class="navbar-item">
+                <a class="navbar-item" href="ProfileServlet?user=<%=ub.getId() %>">
                     <img src="" alt="Profile">
                 </a>
             </div>
@@ -53,20 +58,21 @@
 	ArrayList<postBean> postList = (ArrayList<postBean>)request.getAttribute("postBeanList");
 	for (int i=0; i<postList.size(); i++) {
 		postBean pb = (postBean)postList.get(i);
-		userBean ub = new userBean();
+		ub = new userBean();
 		ub.getUserById(pb.getUser());
+		profileBean profilebean = new profileBean();
+		profilebean.getProfileByProfileId(ub.getProfile());
 %>	
 	<div class="card">
      <div class="header">
          <div class="media">
              <div class="media-left">
                  <figure class="image is-48x48">
-                     <img class="is-rounded" src="D:\Ri-to\Pictures\Windows Spotlight Images/RE1CFvA_1920x1080.jpg">
+                     <img class="is-rounded" src="./ImageFileServlet?name=<%=profilebean.getImage() %>">
                  </figure>
              </div>
              <div class="media-content">
-                 <p class="title is-4"><%=ub.getName() %></p>
-                 <p class="subtitle is-6">@Riito</p>
+                 <a class="title is-4" href="ProfileServlet?user=<%=ub.getId() %>"><%=ub.getName() %></a>
              </div>
          </div>
      </div>
