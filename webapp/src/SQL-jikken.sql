@@ -36,9 +36,13 @@ INSERT INTO Grade(Class,Score,Id)
 INSERT INTO Grade(Class,Score,Id) 
   VALUES('歴史','A',12302);
 
-ALTER TABLE user change id id varchar(36)
+ALTER TABLE post change image image varchar(36)
+
+INSERT INTO post (id, user, text, image) VALUES("test","11111111111111111111111111111111","contiha","999999999999999999999999999999999999")
 
 INSERT INTO user (id, email, name, password) VALUES ("testUserId","rito@gmail.com", "rito", "ritocompany");
+
+INSERT INTO post (id, user, text) VALUES("testId","eace17b9-b502-45d7-9497-b29057556243","hogehogehoge");
   
   
   

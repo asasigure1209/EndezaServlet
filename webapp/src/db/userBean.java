@@ -154,6 +154,32 @@ public class userBean {
 		}
 	}
 	
+	public void getUserById(String userId) {
+		try {
+			//DBのコネクションを取得
+			Connection con = DBManager.getUserConnection();
+			
+			//間接的にSQLを実行させる
+			String sql = "SELECT * FROM user WHERE id=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			ResultSet rs = ps.executeQuery();
+			//結果を格納する
+			while( rs.next() ) {
+				this.setId(rs.getString("id"));
+				this.setEmail(rs.getString("email"));
+				this.setName(rs.getString("name"));
+				this.setProfile(rs.getString("profile"));
+				//userBean	をリストに追加
+			}
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+
+		}
+	}
+	
 	public boolean setUserRecord() {
 		try {
 			//get DB connection

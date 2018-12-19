@@ -38,7 +38,6 @@ public class TimeLineServlet extends HttpServlet {
 		//sessionに有効なuserIdが存在するかチェック
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("user");
-		System.out.println((String)session.getAttribute("user"));
 		
 		userBean ub = new userBean();
 		ArrayList<userBean> list = ub.getUserRecordById(userId);

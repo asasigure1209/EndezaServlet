@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class postBean {
 
-	private String id, user, text, image, createdAt;
+	private String id=null, user, text, image, createdAt;
 	
 	public postBean() {
 		
@@ -18,6 +19,11 @@ public class postBean {
 	}
 	
 	public String getId() {
+		if (this.id == null) {
+			UUID u1 = UUID.randomUUID();
+			this.id = u1.toString();
+		}
+		
 		return this.id;
 	}
 	
@@ -61,10 +67,10 @@ public class postBean {
 			//間接的にSQLを実行させる
 			String sql = "INSERT INTO post (id, user, text, image) VALUES(?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, this.id);
-			ps.setString(2, this.user);
-			ps.setString(3, this.text);
-			ps.setString(4, this.image);
+			ps.setString(1, this.getId());
+			ps.setString(2, this.getUser());
+			ps.setString(3, this.getText());
+			ps.setString(4, this.getImage());
 			//sqlの実行
 			int count = ps.executeUpdate();
 			//close connection
@@ -155,7 +161,7 @@ public class postBean {
 			Connection con = DBManager.getUserConnection();
 			
 			//間接的にSQLを実行させる
-			String sql = "SELECT * FROM post";
+			String sql = "SELECT * FROM post ORDER BY created_at DESC";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			//結果を格納する
