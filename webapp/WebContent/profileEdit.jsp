@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="db.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +12,10 @@
 <link rel="stylesheet" href="./css/bulma.min.css">
 </head>
 <body cz-shortcut-listen="true">
+<%
+	userBean ub = (userBean)request.getAttribute("userBean");
+	profileBean pb = (profileBean)request.getAttribute("profileBean");
+%>
         <!--ヘッダー部分-->
         <div class="navbar is-inline-flex is-transparent">
             <!--navbar-start で投稿ボタンとロゴを右に寄せる-->
@@ -42,13 +48,12 @@
   </div>
   
   <!--以下入力フォーム-->
-  <form onsubmit="return false;" action="#">
+  <form action="ProfileEditServlet" enctype="multipart/form-data" method="post">
     <article class="column is-offset-1 is-10" spellcheck="false">
-      
       <div class="field">
         <label class="label">ユーザー名</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Name" value="Tanaka" name="username">
+            <input class="input" type="text" placeholder="Name" value="<%=ub.getName() %>" name="username">
         </div>
       </div>
       
@@ -56,22 +61,19 @@
    
       <div class="field">
         <label class="label">プロフィール画像</label>
-          <input type="file" name="picture" placeholder="picture">
+          <input type="file" name="file" placeholder="picture">
       </div>
       <br>
       
       <div class="field">
         <label class="label">プロフィール</label>
         <div class="control">
-          <textarea class="textarea" placeholder="Profile" name="profile">
-</textarea>
+          <input type="text" placeholder="Profile" value="<%=pb.getBio() %>" name="bio">
         </div>
       </div>
       <div class="field is-grouped is-grouped-right decide">
         <p class="control">
-          <button class="button is-primary is-block">
-            変更する
-          </button>
+          <input type="submit" value="送信" class="button is-primary is-block">
         </p>
         <p class="control">
           <a class="button is-warning" href="myprofile.html">

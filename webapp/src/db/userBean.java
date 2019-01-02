@@ -206,4 +206,24 @@ public class userBean {
 			return false;
 		}
 	}
+	
+	public void updateUserName() {
+		try {
+			//get DB connection
+			Connection con = DBManager.getUserConnection();
+			
+			//execute Sql
+			String sql = "UPDATE user SET name=? WHERE id=?;";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, this.getName());
+			ps.setString(2, this.getId());
+			//sqlの実行
+			ps.executeUpdate();
+			//close connection
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+			return;
+		}
+	}
 }

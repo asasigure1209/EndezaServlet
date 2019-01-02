@@ -68,4 +68,28 @@ public class profileBean {
 			
 		}
 	}
+	
+	public void updateRecord() {
+		try {
+			//DBのコネクションを取得
+			Connection con = DBManager.getUserConnection();
+			
+			//間接的にSQLを実行させる
+			String sql = "UPDATE profile SET bio=?,image=? WHERE id=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			System.out.println(this.getBio());
+			System.out.println(this.getImage());
+			System.out.println(this.getId());
+			
+			ps.setString(1, this.getBio());
+			ps.setString(2, this.getImage());
+			ps.setString(3, this.getId());
+			ps.executeUpdate();
+
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+			return;
+		}
+	}
 }

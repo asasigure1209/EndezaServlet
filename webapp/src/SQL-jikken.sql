@@ -35,6 +35,8 @@ INSERT INTO Grade(Class,Score,Id)
   VALUES('プログラミング','C',12301);
 INSERT INTO Grade(Class,Score,Id) 
   VALUES('歴史','A',12302);
+  
+UPDATE profile SET bio="oioio", image="e493dae5-8cc5-4718-ab5a-0439d82b3757" WHERE id="HelloProfile";
 
 ALTER TABLE profile change image image varchar(36)
 
