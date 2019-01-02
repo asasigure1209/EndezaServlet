@@ -82,19 +82,7 @@
          </figure>
      </div>
      <div class="card-content">
-         <div class="level is-mobile">
-             <div class="level-left">
-                 <div class="level-item has-text-centered">
-                     <a href>
-                         <i class="material-icons">favorite_border</i>
-                     </a>
-                 </div>
-             </div>
-         </div>
          <div class="content">
-             <p>
-                 <strong>32 Likes</strong>
-             </p>
              <%=pb.getText() %>
          </div>
          <time datetime="2018-1-1"><%=pb.getCreatedAt() %></time>

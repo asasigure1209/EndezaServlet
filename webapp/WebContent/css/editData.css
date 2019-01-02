@@ -1,0 +1,42 @@
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: white;
+    justify-content: space-around;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+.navbar-menu {
+    flex-grow: 0.5;
+    justify-content: center;
+}
+.navbar-menu .navbar-item {
+    flex-grow: 1;
+    justify-content: center;
+}
+.navbar-menu .navbar-item .control {
+    width: 50%;
+}
+
+.title{
+  margin:50px 0 0 10%;
+}
+
+.column{
+  margin-top:20px
+}
+
+.field{
+  margin-bottom:10px;
+}
+
+.decide{
+  margin-top:50px;
+  float:right;
+}
+
+.button{
+  width:90px;
+}

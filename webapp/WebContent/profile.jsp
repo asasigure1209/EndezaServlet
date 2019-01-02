@@ -14,6 +14,7 @@
 <body cz-shortcut-listen="true">
 <%
 	userBean ub = (userBean)request.getAttribute("userBean");
+	userBean myUb = (userBean)request.getAttribute("myUserBean");
 	profileBean profilebean = new profileBean();
 	profilebean.getProfileByProfileId(ub.getProfile());
 	ArrayList<postBean> postList = (ArrayList<postBean>)request.getAttribute("postBeanList");
@@ -56,7 +57,7 @@
 	          <p class="image is-128x128" style="width:132;
 	                        border-radius:300px;
 	                        border:5px solid #fff;
-	                        background:url(http://placehold.it/256x128) center center">
+	                        background:url(./ImageFileServlet?name=<%=profilebean.getImage() %>) center center">
 	            
 	          </p>
 	        </figure>
@@ -69,9 +70,16 @@
 	            <font class="title">
 	            <%=ub.getName() %>
 	            </font>
-	            <a   class="button is-info myprofile" href="myprofile.html">
+<%
+	if (ub.getId().equals(myUb.getId()))
+	{
+%>
+	            <a   class="button is-info myprofile" href="./ProfileEditServlet">
 	            プロフィールの編集
 	            </a>
+<%
+	}
+%>
 	          </p>
 	           <p class="text">
 	           <!--投稿数-->

@@ -1,7 +1,6 @@
 package state;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import db.postBean;
+import db.profileBean;
 import db.userBean;
 
 /**
- * Servlet implementation class ProfileServlet
+ * Servlet implementation class ProfileEditServlet
  */
-@WebServlet("/ProfileServlet")
-public class ProfileServlet extends HttpServlet {
+@WebServlet("/ProfileEditServlet")
+public class ProfileEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileServlet() {
+    public ProfileEditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,35 +32,24 @@ public class ProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("user");
-		//一致するuserを取得
-		userBean ub = new userBean();
-		ArrayList<userBean> list = ub.getUserRecordById(userId);
-		
 		HttpSession session = request.getSession();
-		String myUserId = (String)session.getAttribute("user");
+		String userId = (String)session.getAttribute("user");
 		
-		if (myUserId != null) {
-			userBean myUb = new userBean();
-			ArrayList<userBean> myUblist = myUb.getUserRecordById(userId);
-			request.setAttribute("myUserBean", myUblist.get(0));
-		}
-		
-		if (!list.isEmpty()) {
-			//投稿一覧を取得
-			postBean pb = new postBean();
-			ArrayList<postBean> postList = pb.getPostRecordsByUserId(list.get(0).getId());
+		if (userId != null) {
+			userBean ub = new userBean();
+			ub.getUserById(userId);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
-			//ubとpbをセット
-			request.setAttribute("userBean",list.get(0));
-			request.setAttribute("postBeanList", postList);
-			
-			//call JSP
-			dispatcher.forward(request, response);
-		} else {
-			response.sendRedirect("TimeLineServlet");
+			if (ub.getId() != null) {
+				profileBean pb = new profileBean();
+				pb.getProfileByProfileId(ub.getProfile());
+				RequestDispatcher dispatcher = request.getRequestDispatcher("profileEdit.jsp");
+				request.setAttribute("userBean", ub);
+				request.setAttribute("profileBean", pb);
+				
+				dispatcher.forward(request, response);
+			}
 		}
+		response.sendRedirect("TimeLineServlet");
 	}
 
 	/**
