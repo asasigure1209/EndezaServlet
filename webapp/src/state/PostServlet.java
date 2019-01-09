@@ -50,7 +50,7 @@ public class PostServlet extends HttpServlet {
 				String text = request.getParameter("text");
 				Part part = request.getPart("file");
 				String name = this.getFileName(part);
-				if (!(name.endsWith(".png") || name.endsWith(".jpeg"))) {
+				if (!(name.endsWith(".png") || name.endsWith(".jpeg") || name.endsWith(".jpg"))) {
 					throw new NullPointerException();
 				}
 				

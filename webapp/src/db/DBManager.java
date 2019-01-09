@@ -17,9 +17,8 @@ public class DBManager {
 	//private static String url = "jdbc:mysql://localhost:3306/db_dev";
 	//private static String user = "dev";
 	//private static String password = "endeza";
-	
 	// 本番DB
-		private static String url = "jdbc:mysql://192.168.102:3306/db_minami";
+		private static String url = "jdbc:mysql://192.168.1.102:3306/db_minami";
 		private static String user = "minami";
 		private static String password = "south1209";
 	

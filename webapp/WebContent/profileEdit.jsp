@@ -22,7 +22,7 @@
             <div class="navbar-start">
                 <div class="navbar-item">
                     <a class="navbar-item">
-                        <img src="" alt="Post">
+                        <img src="./img/post.png" alt="Post">
                     </a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <a class="navbar-item">
-                        <img src="" alt="Profile">
+                        <img src="./img/profilr.png" alt="Profile">
                     </a>
                 </div>
             </div>
