@@ -66,6 +66,7 @@ public class PostServlet extends HttpServlet {
 				pb.setImage(fileName);
 				
 				part.write(getServletContext().getRealPath("/WEB-INF/uploaded") + "/" + fileName);
+				System.out.println(getServletContext().getRealPath("/WEB-INF/uploaded") + "/");
 				pb.insertRecord();
 			} catch(Exception e) {
 				//Error

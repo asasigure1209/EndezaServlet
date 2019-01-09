@@ -17,6 +17,12 @@ public class profileBean {
 	}
 	
 	public String getId() {
+		if (this.id == null) {
+			UUID u1 = UUID.randomUUID();
+			this.id = u1.toString();
+			return this.id;
+		}
+		
 		return this.id;
 	}
 	
@@ -90,6 +96,32 @@ public class profileBean {
 			con.close();
 		} catch (Exception e) {
 			return;
+		}
+	}
+	
+	public boolean setProfileRecord() {
+		try {
+			//get DB connection
+			Connection con = DBManager.getUserConnection();
+			
+			//execute Sql
+			String sql = "INSERT INTO profile (id, user) VALUES (?,?);";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, this.getId());
+			ps.setString(2, this.getUser());
+
+			//sqlの実行
+			int count = ps.executeUpdate();
+			//close connection
+			ps.close();
+			con.close();
+			//確認
+			if (count > 0)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }

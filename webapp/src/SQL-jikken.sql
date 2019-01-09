@@ -38,13 +38,15 @@ INSERT INTO Grade(Class,Score,Id)
   
 UPDATE profile SET bio="oioio", image="e493dae5-8cc5-4718-ab5a-0439d82b3757" WHERE id="HelloProfile";
 
-ALTER TABLE profile change image image varchar(36)
+ALTER TABLE user change profile profile varchar(36);
 
 INSERT INTO post (id, user, text, image) VALUES("test","11111111111111111111111111111111","contiha","999999999999999999999999999999999999")
 
 INSERT INTO user (id, email, name, password) VALUES ("testUserId","rito@gmail.com", "rito", "ritocompany");
 
 INSERT INTO post (id, user, text) VALUES("testId","eace17b9-b502-45d7-9497-b29057556243","hogehogehoge");
+
+INSERT INTO profile (id, bio) VALUES ("asdflkj","11111111111111111111111111111111");
   
   
   

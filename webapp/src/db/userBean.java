@@ -226,4 +226,26 @@ public class userBean {
 			return;
 		}
 	}
+	
+	public boolean updateProfile() {
+		try {
+			//get DB connection
+			Connection con = DBManager.getUserConnection();
+			
+			//execute Sql
+			String sql = "UPDATE user SET profile=? WHERE id=?;";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, this.getProfile());
+			ps.setString(2, this.getId());
+			//sqlの実行
+			ps.executeUpdate();
+			//close connection
+			ps.close();
+			con.close();
+			
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

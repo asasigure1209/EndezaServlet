@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import db.profileBean;
 import db.userBean;
 
 /**
@@ -39,6 +40,7 @@ public class SignupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//ユーザー情報を処理するJavaBeanを作る
 		userBean ub = new userBean();
+		profileBean pb = new profileBean();
 		//リクエストされたパラメータ取得
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
@@ -49,7 +51,9 @@ public class SignupServlet extends HttpServlet {
 		ub.setEmail(email);
 		ub.setName(name);
 		ub.setPassword(password);
-		if (ub.setUserRecord()) {
+		pb.setUser(ub.getId());
+		
+		if (ub.setUserRecord() && pb.setProfileRecord() && bindProfile(ub, pb)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", ub.getId());
 			
@@ -59,4 +63,9 @@ public class SignupServlet extends HttpServlet {
 		}
 	}
 
+	private boolean bindProfile(userBean ub, profileBean pb)
+	{
+		ub.setProfile(pb.getId());
+		return ub.updateProfile();
+	}
 }

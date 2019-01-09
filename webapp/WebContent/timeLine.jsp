@@ -31,7 +31,7 @@
         <!--navbar-brand でロゴとして指定する-->
         <div class="navbar-brand">
             <a class="navbar-item" href="TimeLineServlet">
-                <img src="" alt="Logo" width="112" height="28">
+                <img src="./img/logo.png" alt="Logo" width="112" height="28">
             </a>
         </div>
 
