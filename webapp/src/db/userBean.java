@@ -6,18 +6,34 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * ユーザーデータを設定取得する
+ * @author MinamiHitoki
+ *
+ */
 public class userBean {
 
+	/**
+	 * ユーザのid,email,name,password
+	 */
 	private String id=null, email, name, profile="", password;
 	
 	public userBean() {
 		
 	}
 	
+	/**
+	 * idを設定する
+	 * @param id 設定したいid
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 	
+	/**
+	 * idを取得する
+	 * @return ユーザのid
+	 */
 	public String getId() {
 		if (this.id == null) {
 			UUID u1 = UUID.randomUUID();
@@ -28,38 +44,74 @@ public class userBean {
 		return this.id;
 	}
 	
+	/**
+	 * emailの設定
+	 * @param email 設定したいemail
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	
+	/**
+	 * emailの取得
+	 * @return ユーザのemail
+	 */
 	public String getEmail() {
 		return this.email;
 	}
 	
+	/**
+	 * nameの設定
+	 * @param name ユーザの名前
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * ユーザの名前を取得する
+	 * @return ユーザの名前
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * ユーザのprofileIdを設定します
+	 * @param profile 設定したいprofileId
+	 */
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
 	
+	/**
+	 * profileIdを取得する
+	 * @return profileのid
+	 */
 	public String getProfile() {
 		return this.profile;
 	}
 	
+	/**
+	 * Passwordを設定します
+	 * @param password 設定したいパスワード
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	/**
+	 * パスワードの取得
+	 * @return ユーザのパスワード
+	 */
 	public String getPassword() {
 		return this.password;
 	}
 	
+	/**
+	 * DBのuserテーブルに自分のインスタンスの情報を登録します
+	 * @return 登録成功の可否
+	 */
 	public boolean insertRecord() {
 		try {
 			//DBのコネクションを取得
@@ -88,6 +140,12 @@ public class userBean {
 		}
 	}
 	
+	/**
+	 * email,passwordに応じてuserのレコードリストを返します
+	 * @param email 取得したいuserのemail
+	 * @param password 取得したいuserのpassword
+	 * @return emailとpasswordが一致したユーザレコード。一致しない場合はnullを返します
+	 */
 	public ArrayList<userBean> getUserRecordByEmail(String email, String password) {
 		
 		ArrayList<userBean> list = new ArrayList<userBean>();
@@ -122,6 +180,11 @@ public class userBean {
 		}
 	}
 	
+	/**
+	 * userIdに応じてDBから取り出したレコードをuserBeanのリストとして返します
+	 * @param userId 取得したいユーザのid
+	 * @return idが一致したユーザのuserBeanリスト
+	 */
 	public ArrayList<userBean> getUserRecordById(String userId) {
 		ArrayList<userBean> list = new ArrayList<userBean>();
 		
@@ -154,6 +217,10 @@ public class userBean {
 		}
 	}
 	
+	/**
+	 * idに応じてインスタンス自身にDBから取り出したレコードを設定します。
+	 * @param userId 取得したいuserId
+	 */
 	public void getUserById(String userId) {
 		try {
 			//DBのコネクションを取得
@@ -180,6 +247,10 @@ public class userBean {
 		}
 	}
 	
+	/**
+	 * 自身のインスタンスに設定したプロパティをDBのuserテーブルに登録します
+	 * @return 登録成功の可否
+	 */
 	public boolean setUserRecord() {
 		try {
 			//get DB connection
@@ -207,6 +278,9 @@ public class userBean {
 		}
 	}
 	
+	/**
+	 * 自身のインスタンスに設定されたnameでDBのuserテーブルを更新します
+	 */
 	public void updateUserName() {
 		try {
 			//get DB connection
@@ -227,6 +301,10 @@ public class userBean {
 		}
 	}
 	
+	/**
+	 * 自身のインスタンスに設定されたprofileIdでDBのuserテーブルを更新します
+	 * @return 更新成功の可否
+	 */
 	public boolean updateProfile() {
 		try {
 			//get DB connection

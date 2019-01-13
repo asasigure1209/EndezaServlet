@@ -19,7 +19,7 @@
         <!--ヘッダー部分-->
         <div class="navbar is-inline-flex is-transparent">
             <!--navbar-start で投稿ボタンとロゴを右に寄せる-->
-            <div class="navbar-start">
+            <div class="navbar-start" style="visibility: hidden">
                 <div class="navbar-item">
                     <a class="navbar-item">
                         <img src="./img/post.png" alt="Post">
@@ -28,7 +28,7 @@
             </div>
             <!--navbar-brand でロゴとして指定する-->
             <div class="navbar-brand">
-                <a class="navbar-item">
+                <a class="navbar-item" href="TimeLineServlet">
                     <img src="./img/logo.png" alt="Logo" width="112" height="28">
                 </a>
             </div>
@@ -36,8 +36,8 @@
             <!--navbar-end でプロフィールボタンを左に寄せる-->
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a class="navbar-item">
-                        <img src="./img/profilr.png" alt="Profile">
+                    <a class="navbar-item" href="./ProfileServlet">
+                        <img src="./img/profile.png" alt="Profile">
                     </a>
                 </div>
             </div>

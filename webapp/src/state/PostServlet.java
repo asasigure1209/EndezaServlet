@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,29 @@ public class PostServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		RequestDispatcher dispatcher;
+		
+		//sessionに有効なuserIdが存在するかチェック
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("user");
+		
+		userBean ub = new userBean();
+		ArrayList<userBean> list = ub.getUserRecordById(userId);
+		 
+		if (!list.isEmpty()) {
+			//TLに投稿一覧
+			postBean pb = new postBean();
+			ArrayList<postBean> postList = pb.getAllPostRecords();
+			
+			dispatcher = request.getRequestDispatcher("post.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			response.sendRedirect("signin.html");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

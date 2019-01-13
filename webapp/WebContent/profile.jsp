@@ -23,7 +23,7 @@
  <!--ヘッダー部分-->
 	<div class="navbar is-inline-flex is-transparent">
 	    <!--navbar-start で投稿ボタンとロゴを右に寄せる-->
-	    <div class="navbar-start">
+	    <div class="navbar-start" style="visibility: hidden">
 	        <div class="navbar-item">
 	            <a class="navbar-item">
 	                <img src="./img/post.png" alt="Post">

@@ -11,11 +11,14 @@
 
 <link rel="stylesheet" type="text/css" href="./css/instaAlbum.css">
 <link rel="stylesheet" href="./css/bulma.min.css">
+<script src="./js/jquery-3.3.1.min.js"></script>
 </head>
 <body cz-shortcut-listen="true">
 <% 
 	ArrayList<userBean> userList = (ArrayList<userBean>)request.getAttribute("userBeanList");
 	userBean ub = userList.get(0);
+	profileBean myUserProfileBean = new profileBean();
+	myUserProfileBean.getProfileByProfileId(ub.getProfile());
 %>
 
 	<!--ヘッダー部分-->
@@ -23,7 +26,7 @@
         <!--navbar-start で投稿ボタンとロゴを右に寄せる-->
         <div class="navbar-start">
             <div class="navbar-item">
-                <a class="navbar-item">
+                <a class="navbar-item button" id="open">
                     <img src="./img/post.png" alt="Post">
                 </a>
             </div>
@@ -44,12 +47,6 @@
             </div>
         </div>
     </div>
-	
-	<form action="PostServlet" enctype="multipart/form-data" method="post">
-		<input type="text" name="text">
-		<input type="file" name="file">
-		<input type="submit" value="submit">
-	</form>
 	
 	<!--メイン部分-->
     <div class="columns body-columns">
@@ -85,7 +82,7 @@
          <div class="content">
              <%=pb.getText() %>
          </div>
-         <time datetime="2018-1-1"><%=pb.getCreatedAt() %></time>
+         <time><%=pb.getCreatedAt() %></time>
      </div>
  </div>
 <%
@@ -97,5 +94,46 @@
 	<form action="LogoutServlet" method="GET">
 		<input type="submit" value="logout">
 	</form>
+	
+	<div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+          <div class="box">
+              <div class="media">
+                  <figure class="media-left">
+                      <p class="image is-64x64">
+                      <img class="is-rounded" src="./ImageFileServlet?name=<%=myUserProfileBean.getImage() %>">
+                      </p>
+                  </figure>
+                  <form method="POST" action="./PostServlet" enctype="multipart/form-data">
+                  <div class="media-content">
+                      <div class="field">
+                           	<p>
+                               <div class="file">
+                                   <label class="file-label">
+                                       <input class="file-input" type="file" name="file">
+                                       <span class="file-cta">
+                                       <span class="file-label">
+                                           Choose a file
+                                       </span>
+                                       </span>
+                                   </label>
+                               </div>
+                           	</p>
+                           <p class="control">
+                               <textarea name="text" id="text-box" class="textarea" placeholder="Add a comment..." rows="5"></textarea>
+                           </p>
+                      </div>
+                  </div>
+                  <input type="submit" value="Share" class="button is-info media-right">
+                  </form>
+              </div>
+          </div>
+      </div>
+   <button id="close" class="modal-close is-large" aria-label="close"></button>
+</div>
+            
+<script src="./js/modal.js"></script>
+<script src="./js/postCheck.js"></script>
 </body>
 </html>

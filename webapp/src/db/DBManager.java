@@ -10,6 +10,11 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * DBへの接続とデータの取得を行うマネージャ
+ * @author MinamiHitoki
+ *
+ */
 public class DBManager {
 
 	// 重要： 以下の部分を各自の MySQL の設定にあわせて変更する
@@ -18,6 +23,9 @@ public class DBManager {
 	//private static String user = "dev";
 	//private static String password = "endeza";
 	// 本番DB
+	/**
+	 * mysqlサーバのurl,user,password
+	 */
 		private static String url = "jdbc:mysql://192.168.1.102:3306/db_minami";
 		private static String user = "minami";
 		private static String password = "south1209";
@@ -28,7 +36,10 @@ public class DBManager {
 	// private static String user = "taro";
 	// private static String password = "自分のパスワード";
 
-	//  データベースへのコネクションを作成して返すメソッド
+	/**
+	 * データベースへのコネクションを作成して返すメソッド	
+	 * @return 接続したConnection
+	 */
 	public static Connection getUserConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();

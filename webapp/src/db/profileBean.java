@@ -5,17 +5,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.UUID;
 
+/**
+ * プロフィールを設定取得する
+ * @author MinamiHitoki
+ *
+ */
 public class profileBean {
+	/**
+	 * プロフィールのid,bio,user,image
+	 */
 	private String id=null, bio, user, image;
 	
 	public profileBean() {
 		
 	}
 	
+	/**
+	 * profileのidを設定します
+	 * @param id 設定したいid
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 	
+	/**
+	 * profileのidを取得する
+	 * @return profileのid
+	 */
 	public String getId() {
 		if (this.id == null) {
 			UUID u1 = UUID.randomUUID();
@@ -26,30 +42,58 @@ public class profileBean {
 		return this.id;
 	}
 	
+	/**
+	 * profileのBioのidの設定
+	 * @param bio 設定したいBioのid
+	 */
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
 	
+	/**
+	 * profileのBioのidの取得
+	 * @return profileのBioのid
+	 */
 	public String getBio() {
 		return this.bio;
 	}
 	
+	/**
+	 * profileのuserId
+	 * @param user 設定したいuserId
+	 */
 	public void setUser(String user) {
 		this.user = user;
 	}
 	
+	/**
+	 * profileのuserIdを取得する
+	 * @return profileのuserId
+	 */
 	public String getUser() {
 		return this.user;
 	}
 	
+	/**
+	 * profileのimageIdの設定
+	 * @param image 設定したいimageId
+	 */
 	public void setImage(String image) {
 		this.image = image;
 	}
 	
+	/**
+	 * profileのimageIdを取得する
+	 * @return profileのimageId
+	 */
 	public String getImage() {
 		return this.image;
 	}
 	
+	/**
+	 * profileIdに応じてprofileを自身のインスタンスに格納する
+	 * @param profileId 取得したいprofileのid
+	 */
 	public void getProfileByProfileId(String profileId) {
 		try {
 			//DBのコネクションを取得
@@ -75,6 +119,9 @@ public class profileBean {
 		}
 	}
 	
+	/**
+	 * profileの更新
+	 */
 	public void updateRecord() {
 		try {
 			//DBのコネクションを取得
@@ -99,6 +146,10 @@ public class profileBean {
 		}
 	}
 	
+	/**
+	 * profileの作成
+	 * @return 作成の成功の可否
+	 */
 	public boolean setProfileRecord() {
 		try {
 			//get DB connection
